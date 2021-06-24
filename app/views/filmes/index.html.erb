@@ -1,0 +1,16 @@
+<h1>Filmes disponíveis:</h1>
+<ul>
+    <%= link_to 'Adicionar novo filme', new_filme_path, class:"btn btn-primary" %>
+    <% @filmes.each do |filme| %>
+</ul>
+<ul>
+    <li><b>Título:</b> "<%= filme.titulo %>"
+    <ul>
+        <li><b>Diretor:</b> <%= filme.diretor %></li>
+        <%= link_to 'Ver detalhes', filme_path(filme), class:"btn btn-info" %>
+    </ul>
+    </li>
+<ul>
+</ul>
+</ul>
+<% end %>
