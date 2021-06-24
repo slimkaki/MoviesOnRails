@@ -1,0 +1,18 @@
+<%= link_to 'Voltar', filmes_path, class: 'btn btn-light'%>
+<h1>Sobre o filme:</h1>
+
+<b>Título:</b> <%= @filme.titulo %>
+</br>
+<b>Diretor:</b> <%= @filme.diretor %>
+</br>
+<b>Descrição:</b> <%= @filme.sinopse %>
+</br>
+<b>Data de Lançamento:</b>
+<% if @filme.data_lancamento %>
+    <%= @filme.data_lancamento.day %>/<%= @filme.data_lancamento.month%>/<%= @filme.data_lancamento.year %>
+<% else %>
+    unknown date
+<% end %>
+</br>
+<%= link_to 'editar',  edit_filme_path(@filme), method: :get, class:"btn btn-secondary" %>
+<%= link_to 'deletar', filme_path(@filme), method: :delete, data: { confirm: "Tem certeza que deseja apagar este filme?"}, class:"btn btn-danger" %>

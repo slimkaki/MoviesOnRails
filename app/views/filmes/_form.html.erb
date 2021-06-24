@@ -1,0 +1,7 @@
+<%= simple_form_for filme do |f| %>
+  <%= f.input :titulo %>
+  <%= f.input :diretor %>  
+  <%= f.input :data_lancamento, { :start_year => 1900, order: [:day, :month, :year] } %> 
+  <%= f.input :sinopse %>
+  <%= f.submit %>
+<% end %>
