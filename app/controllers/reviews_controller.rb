@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
         @review = Review.new(review_params)
         @filme = Filme.find(params[:filme_id])
         @review.filme = @filme
+        @review.user = current_user
         @review.save
         redirect_to filme_path(@filme)
     end

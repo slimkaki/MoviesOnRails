@@ -3,8 +3,9 @@ class CreateReviews < ActiveRecord::Migration[6.1]
     create_table :reviews do |t|
       t.text :content
       t.integer :rating
-      t.boolean :visible
+      t.boolean :visible, default: true
       t.references :filme, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

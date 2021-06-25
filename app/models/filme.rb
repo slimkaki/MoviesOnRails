@@ -1,5 +1,5 @@
 class Filme < ApplicationRecord
-    has_many :reviews
+    has_many :reviews, dependent: :delete_all
     
-    validates :titulo, presence: true 
+    validates :titulo, presence: true, uniqueness: true
 end
