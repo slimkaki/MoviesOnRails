@@ -1,18 +1,40 @@
 <%= link_to 'Voltar', filmes_path, class: 'btn btn-light'%>
-<h1>Sobre o filme:</h1>
+<div class="container">
+    <h1>Sobre o filme:</h1>
 
-<b>Título:</b> <%= @filme.titulo %>
-</br>
-<b>Diretor:</b> <%= @filme.diretor %>
-</br>
-<b>Descrição:</b> <%= @filme.sinopse %>
-</br>
-<b>Data de Lançamento:</b>
-<% if @filme.data_lancamento %>
-    <%= @filme.data_lancamento.day %>/<%= @filme.data_lancamento.month%>/<%= @filme.data_lancamento.year %>
-<% else %>
-    unknown date
-<% end %>
-</br>
-<%= link_to 'editar',  edit_filme_path(@filme), method: :get, class:"btn btn-secondary" %>
-<%= link_to 'deletar', filme_path(@filme), method: :delete, data: { confirm: "Tem certeza que deseja apagar este filme?"}, class:"btn btn-danger" %>
+    <b>Título:</b> <%= @filme.titulo %>
+    </br>
+    <b>Diretor:</b> <%= @filme.diretor %>
+    </br>
+    <b>Descrição:</b> <%= @filme.sinopse %>
+    </br>
+    <b>Data de Lançamento:</b>
+    <% if @filme.data_lancamento %>
+        <%= @filme.data_lancamento.day %>/<%= @filme.data_lancamento.month%>/<%= @filme.data_lancamento.year %>
+    <% else %>
+        unknown date
+    <% end %>
+    </br>
+    <%= link_to 'editar',  edit_filme_path(@filme), method: :get, class:"btn btn-secondary" %>
+    <%= link_to 'deletar', filme_path(@filme), method: :delete, data: { confirm: "Tem certeza que deseja apagar este filme?"}, class:"btn btn-danger" %>
+    </br>
+    </br>
+    <h5>Avaliações:</h5>
+    <% @reviews.each do |review| %>
+    <li>
+        <% review.rating.times do  %>
+            <span class="glyphicon glyphicon-star"></span>
+        <% end %>
+        <%= review.content %>
+        <%= review.visible %>
+
+    <%
+=begin%>
+ <%= link_to "hide", review_hide_path(review), method: :patch, class: 'btn btn-primary btn-sm' %>  
+<%
+=end%>
+    </li>
+    <% end %>
+    <%= render 'reviews/new'%>
+    
+</div>

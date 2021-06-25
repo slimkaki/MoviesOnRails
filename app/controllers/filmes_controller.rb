@@ -6,6 +6,10 @@ class FilmesController < ApplicationController
     end
   
     def show
+        @review = Review.new
+        @reviews = Review.where(filme: @filme)
+        # @reviews = Review.where(filme_id: @filme.id, visible: true)
+        # raise
     end
 
     def new
