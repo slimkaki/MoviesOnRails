@@ -1,0 +1,14 @@
+</br>
+<h5>Escreva sua opinião:</h5>
+
+<%= simple_form_for [@filme, @review] do |f| %>
+    <%= f.input :content %>
+    <%
+=begin%>
+ <span class=”glyphicon glyphicon-star-empty”></span> 
+<%
+=end%>
+    <%= f.input :rating, collection: [1, 2, 3, 4, 5] %>
+    <%= f.submit %>
+<% end %>
+<br/>

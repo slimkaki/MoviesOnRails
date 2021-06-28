@@ -1,18 +1,61 @@
-<%= link_to 'Voltar', filmes_path, class: 'btn btn-light'%>
-<h1>Sobre o filme:</h1>
+<div class="canto-superior-direito">
+    <%= link_to 'Voltar', filmes_path, class: 'btn btn-light'%>
+</div>
+<div class="container">
+    <h1>Sobre o filme:</h1>
 
-<b>Título:</b> <%= @filme.titulo %>
-</br>
-<b>Diretor:</b> <%= @filme.diretor %>
-</br>
-<b>Descrição:</b> <%= @filme.sinopse %>
-</br>
-<b>Data de Lançamento:</b>
-<% if @filme.data_lancamento %>
-    <%= @filme.data_lancamento.day %>/<%= @filme.data_lancamento.month%>/<%= @filme.data_lancamento.year %>
-<% else %>
-    unknown date
-<% end %>
-</br>
-<%= link_to 'editar',  edit_filme_path(@filme), method: :get, class:"btn btn-secondary" %>
-<%= link_to 'deletar', filme_path(@filme), method: :delete, data: { confirm: "Tem certeza que deseja apagar este filme?"}, class:"btn btn-danger" %>
+    <b>Título:</b> <%= @filme.titulo %>
+    </br>
+    <b>Diretor:</b> <%= @filme.diretor %>
+    </br>
+    <b>Descrição:</b> <%= @filme.sinopse %>
+    </br>
+    <b>Data de Lançamento:</b>
+    <% if @filme.data_lancamento %>
+        <%= @filme.data_lancamento.day %>/<%= @filme.data_lancamento.month%>/<%= @filme.data_lancamento.year %>
+    <% else %>
+        unknown date
+    <% end %>
+    </br>
+    <%= link_to 'editar',  edit_filme_path(@filme), method: :get, class:"btn btn-secondary" %>
+    <%= link_to 'deletar', filme_path(@filme), method: :delete, data: { confirm: "Tem certeza que deseja apagar este filme?"}, class:"btn btn-danger" %>
+
+    </br>
+    </br>
+    <h5>Avaliações:</h5>
+    <% @reviews.each do |review| %>
+        <div id="accordion-<%= review.id %>">
+            <div class="card">
+                <div class="card-header" id="headingOne-<%=review.id%>">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-<%=review.id%>" aria-expanded="false" aria-controls="collapseOne-<%=review.id%>">
+                            <% review.rating.times do  %>
+                                <i class="bi bi-star-fill"></i>
+                            <% end %>
+
+                            <% (5 - review.rating).times do %>
+                                <i class="bi bi-star"></i>
+                            <% end %>
+                            -
+                            <%= review.user.email %>
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne-<%=review.id%>" class="collapse show" aria-labelledby="headingOne-<%=review.id%>" data-parent="#accordion-<%=review.id%>">
+                    <div class="card-body">
+                        <%= review.content %>
+                        <%
+=begin%>
+ <%= link_to "hide", review_hide_path(review), method: :patch, class: 'btn btn-primary btn-sm' %>    
+<%
+=end%>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    <% end %>
+
+    <%= render 'reviews/new'%>
+    
+</div>
